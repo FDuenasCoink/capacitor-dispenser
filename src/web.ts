@@ -45,7 +45,11 @@ export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
 
   async dispenseCard(callback: DispenseCallback): Promise<string> {
     this.logger.log('dispens card...');
-    callback({ statusCode: 0, message: 'dispense card web',  completed: false });
+    const response = {
+      statusCode: 200,
+      message: 'web simulation response',
+    };
+    callback(response);
     this.dispenser.dispenseCard((event) => {
       this.logger.log('card taken');
       callback(event);

@@ -1,0 +1,132 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "spdlog",
+					"jsonFile" : "directory-spdlog-Debug-d69c2b3088863f15321d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "spdlog",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "dispenser",
+					"jsonFile" : "directory-dispenser-Debug-c0ef9d3913e23728344c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22.1"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "dispenser",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "oink"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "spdlog",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "dispenser",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "Dispenser::@a60303246301a0db4fd2",
+					"jsonFile" : "target-Dispenser-Debug-b768674697bd31213afe.json",
+					"name" : "Dispenser",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "Dispenser_Wrapper::@a60303246301a0db4fd2",
+					"jsonFile" : "target-Dispenser_Wrapper-Debug-8eee6eaf3b2c9118825c.json",
+					"name" : "Dispenser_Wrapper",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "spdlog::@d269c8109d32a9027337",
+					"jsonFile" : "target-spdlog-Debug-3940dbc74807a2dfb391.json",
+					"name" : "spdlog",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/.cxx/Debug/2j572x53/x86",
+		"source" : "/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

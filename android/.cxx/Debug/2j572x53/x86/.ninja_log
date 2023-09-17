@@ -1,0 +1,18 @@
+# ninja log v5
+0	361	1694980751468813341	spdlog/CMakeFiles/spdlog.dir/src/file_sinks.cpp.o	c3c6e24395033f96
+1	364	1694980751474257323	dispenser/CMakeFiles/Dispenser.dir/DispenserControl.cpp.o	3e07722788ac95d7
+1	368	1694980751479310348	dispenser/CMakeFiles/Dispenser.dir/StateMachine.cpp.o	902a850d8868a3f8
+0	421	1694980751531147344	spdlog/CMakeFiles/spdlog.dir/src/cfg.cpp.o	92b8693479c50597
+0	550	1694980751658826381	spdlog/CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.o	482d6891989fe350
+0	572	1694980751681356890	spdlog/CMakeFiles/spdlog.dir/src/async.cpp.o	14391f1c55348f7c
+0	585	1694980751694136973	spdlog/CMakeFiles/spdlog.dir/src/color_sinks.cpp.o	cc9f7ec37f66c522
+1	592	1694980751701441907	spdlog/CMakeFiles/spdlog.dir/src/bundled_fmtlib_format.cpp.o	a8f02bc4283652b0
+1	847	1694980751954376823	dispenser/CMakeFiles/Dispenser.dir/Dispenser.cpp.o	f1912b8981c0fa90
+0	1356	1694980752456744457	spdlog/CMakeFiles/spdlog.dir/src/spdlog.cpp.o	f63832531c175031
+1356	1381	1694980752493998000	spdlog/libspdlogd.a	104272c8bb76c457
+1381	1463	1694980752540921679	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/build/intermediates/cxx/Debug/2j572x53/obj/x86/libDispenser.so	66fd2589fee982b7
+1463	1608	1694980752720761169	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJAVA_wrap.cxx	5d60a0d83a239689
+1463	1608	1694980752720761169	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControl.java	5d60a0d83a239689
+1463	1608	1694980752720761169	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJNI.java	5d60a0d83a239689
+1608	1914	1694980753024373459	dispenser/CMakeFiles/Dispenser_Wrapper.dir/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJAVA_wrap.cxx.o	c9feb09d234786a0
+1914	1950	1694980753058297472	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/build/intermediates/cxx/Debug/2j572x53/obj/x86/libDispenser_Wrapper.so	7f3f645d624e01a2
