@@ -1,5 +1,5 @@
 import { SplashScreen } from '@capacitor/splash-screen';
-import { Dispenser } from 'capacitor-dispenser';
+import { Dispenser } from '@fduenascoink/capacitor-dispenser';
 
 window.customElements.define(
   'capacitor-welcome',
