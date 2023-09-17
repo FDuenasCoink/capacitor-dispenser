@@ -1,5 +1,5 @@
 import { SplashScreen } from '@capacitor/splash-screen';
-import { Camera } from '@capacitor/camera';
+import { Dispenser } from 'capacitor-dispenser';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -93,20 +93,13 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#take-photo').addEventListener('click', async function (e) {
-        try {
-          const photo = await Camera.getPhoto({
-            resultType: 'uri',
+        console.log('dispenseee');
+        await Dispenser.init();
+        setTimeout(() => {
+          Dispenser.dispenseCard((event) => {
+            console.log('dispense card', event);
           });
-
-          const image = self.shadowRoot.querySelector('#image');
-          if (!image) {
-            return;
-          }
-
-          image.src = photo.webPath;
-        } catch (e) {
-          console.warn('User cancelled', e);
-        }
+        },5_000);
       });
     }
   }

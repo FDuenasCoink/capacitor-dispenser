@@ -1,7 +1,7 @@
 import { WebPlugin } from "@capacitor/core";
 
 import type { DeviceStatus, DispenseCallback, DispenserFlags, DispenserPlugin, ResponseStatus } from "./definitions";
-import { Dispenser } from "./lib";
+import { Dispenser } from "./lib/Dispenser";
 import { Logger } from "./lib/logger";
 
 export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
@@ -45,6 +45,7 @@ export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
 
   async dispenseCard(callback: DispenseCallback): Promise<string> {
     this.logger.log('dispens card...');
+    callback({ statusCode: 0, message: 'dispense card web',  completed: false });
     this.dispenser.dispenseCard((event) => {
       this.logger.log('card taken');
       callback(event);

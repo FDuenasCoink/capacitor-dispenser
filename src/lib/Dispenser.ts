@@ -1,4 +1,4 @@
-import type { DispenseCallback } from '../../definitions';
+import type { DispenseCallback } from '../definitions';
 
 import { Card } from './Card';
 import { Controller } from './Controller';

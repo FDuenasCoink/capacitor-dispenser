@@ -94,6 +94,7 @@ export class Controller {
 
     const check = document.createElement('ion-checkbox');
     check.checked = value;
+    check.innerText = labelText;
     check.addEventListener('ionChange', (event) => {
       const checked = (event as CustomEvent).detail.checked;
       this.options = {

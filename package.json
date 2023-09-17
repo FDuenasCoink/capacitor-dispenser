@@ -46,7 +46,8 @@
     "build-electron": "tsc --project electron/tsconfig.json && rollup -c electron/rollup.config.js && rimraf ./electron/build"
   },
   "dependencies": {
-    "@fduenascoink/oink-addons": "2.4.0"
+    "@fduenascoink/oink-addons": "2.4.0",
+    "@ionic/core": "^7.4.0"
   },
   "devDependencies": {
     "@capacitor-community/electron": "^4.1.2",

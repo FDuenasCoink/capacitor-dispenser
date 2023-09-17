@@ -1,3 +1,6 @@
+// @ts-ignore
+import { visaImage } from './visa.image';
+
 export class Card {
   private readonly CARD_HEIGHT = 350;
   private readonly DISPENSE_POS = 130;
@@ -32,7 +35,7 @@ export class Card {
     card.ontouchend = this.handleTouchEnd.bind(this);
 
     const img = document.createElement('img');
-    img.src = '/assets/plugins/visa-fisica.png';
+    img.src = visaImage;
     img.style.height = '100%';
 
     card.appendChild(img);
