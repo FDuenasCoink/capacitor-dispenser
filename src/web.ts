@@ -34,7 +34,7 @@ export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
       message: "web simulated response",
       aditionalInfo: "",
       priority: 0,
-      date: new Date().toString(),
+      date: new Date().toISOString(),
     }
   }
 
