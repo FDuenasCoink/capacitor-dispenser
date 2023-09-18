@@ -1,0 +1,1 @@
+/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/build/intermediates/cxx/Debug/3df5f642/obj/x86
