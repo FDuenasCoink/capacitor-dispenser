@@ -1,15 +1,18 @@
 import type { IDispenser, UnsubscribeFunc } from '@fduenascoink/oink-addons';
 import { Dispenser as DispenserAddon } from '@fduenascoink/oink-addons';
+import { EventEmitter } from 'events';
 
-import type { DeviceStatus, DispenseCallback, DispenserFlags, DispenserPlugin, ResponseStatus } from '../../src/definitions';
+import type { DeviceStatus, DispenserFlags, DispenserPlugin, ResponseStatus } from '../../src/definitions';
 
 import { PluginError, getCapacitorElectronConfig } from './utils';
 
-export class Dispenser implements DispenserPlugin {
+export class Dispenser extends EventEmitter implements DispenserPlugin {
+  private static readonly DISPENSE_EVENT = 'dispense';
   private dispenser: IDispenser;
   private unsubscribeFn?: UnsubscribeFunc;
 
   constructor() {
+    super();
     const config = getCapacitorElectronConfig('Dispenser');
     this.dispenser = new DispenserAddon({
       maxInitAttempts: config.maxInitAttempts ?? 4,
@@ -46,7 +49,7 @@ export class Dispenser implements DispenserPlugin {
     return response;
   }
 
-  async dispenseCard(callback: DispenseCallback): Promise<string> {
+  async dispenseCard(): Promise<ResponseStatus> {
     this.unsubscribeFn?.();
     let response = this.dispenser.dispenseCard();
     let status = response.statusCode;
@@ -62,21 +65,23 @@ export class Dispenser implements DispenserPlugin {
       await this.endProcess();
       throw new PluginError(response.message, response.statusCode);
     }
-    callback(response);
+
     this.unsubscribeFn = this.dispenser.onDispense((dispenseEvent) => {
       const status = dispenseEvent.statusCode;
       if (status === 301) return;
       const succesCodes = [201, 202, 506];
       if (succesCodes.includes(status)) {
-        const event = { ...dispenseEvent, completed: true };
-        callback(event);
+        this.emit(Dispenser.DISPENSE_EVENT, { data: response });
       } else {
-        const error = new PluginError(dispenseEvent.message, dispenseEvent.statusCode);
-        callback(null, error);
+        const { statusCode: code, message } = dispenseEvent;
+        const error = { code, message };
+        this.emit(Dispenser.DISPENSE_EVENT, { error });
       }
+      this.removeAllListeners(Dispenser.DISPENSE_EVENT);
       this.unsubscribeFn?.();
     });
-    return '';
+
+    return response;
   }
 
   async recycleCard(): Promise<ResponseStatus> {
@@ -124,6 +129,21 @@ export class Dispenser implements DispenserPlugin {
       ...status,
       date: new Date().toISOString(),
     }
+  }
+
+  // @ts-ignore
+  addListener(event: string | symbol, listener: (...args: any[]) => void): any {
+    return super.addListener(event, listener);
+  }
+
+  // @ts-ignore
+  removeAllListeners(event?: string | symbol): any {
+    return super.removeAllListeners(event);
+  }
+
+  // @ts-ignore
+  removeListener(event: string | symbol, listener: (...args: any[]) => void): any {
+    return super.removeListener(event, listener);
   }
 
 }

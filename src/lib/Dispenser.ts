@@ -1,4 +1,4 @@
-import type { DispenseCallback } from '../definitions';
+import type { DispenseEvent } from '../definitions';
 
 import { Card } from './Card';
 import { Controller } from './Controller';
@@ -12,13 +12,13 @@ export class Dispenser {
     this.controller.init();
   }
 
-  dispenseCard(callback?: DispenseCallback) {
+  dispenseCard(callback?: (event: DispenseEvent) => void) {
     this.card.dispense(() => {
-      callback?.({
+      const data = {
         statusCode: 200,
         message: 'web simulated response',
-        completed: true,
-      });
+      }
+      callback?.({ data });
     });
   }
 

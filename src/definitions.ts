@@ -1,5 +1,7 @@
 /// <reference types="@capacitor/cli" />
 
+import type { PluginListenerHandle } from "@capacitor/core";
+
 declare module '@capacitor/cli' {
   export interface PluginsConfig {
     Dispenser?: {
@@ -51,11 +53,10 @@ export interface DispenserFlags {
   dispenserFull: boolean;
 }
 
-export type CallbackID = string;
-export interface DispenseData extends ResponseStatus {
-  completed?: boolean;
+export interface DispenseEvent {
+  error?: { code: number, message: string };
+  data: ResponseStatus;
 }
-export type DispenseCallback = (data: DispenseData, err?: any) => void;
 
 export interface DispenserPlugin {
   /**
@@ -77,7 +78,7 @@ export interface DispenserPlugin {
   /**
    * Funtion to start the process of dispense a card.
    */
-  dispenseCard(callback: DispenseCallback): Promise<CallbackID>;
+  dispenseCard(): Promise<ResponseStatus>;
   /**
    * Funtion to recicle a card in the dispenser.
    */
@@ -90,4 +91,8 @@ export interface DispenserPlugin {
    * Funtion to get all the dispenser flags.
    */
   getDispenserFlags(): Promise<DispenserFlags>;
+  /**
+   * Listens for card dispensed.
+   */
+  addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void): Promise<PluginListenerHandle> & PluginListenerHandle;
 }

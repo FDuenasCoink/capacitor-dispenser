@@ -1,10 +1,11 @@
 import { WebPlugin } from "@capacitor/core";
 
-import type { DeviceStatus, DispenseCallback, DispenserFlags, DispenserPlugin, ResponseStatus } from "./definitions";
+import type { DeviceStatus, DispenserFlags, DispenserPlugin, ResponseStatus } from "./definitions";
 import { Dispenser } from "./lib/Dispenser";
 import { Logger } from "./lib/logger";
 
 export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
+  private static readonly DISPENSE_EVENT = 'dispense';
   private dispenser = new Dispenser();
   private logger = new Logger('DISPENSER');
 
@@ -43,18 +44,17 @@ export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
     this.dispenser.init();
   }
 
-  async dispenseCard(callback: DispenseCallback): Promise<string> {
+  async dispenseCard(): Promise<ResponseStatus> {
     this.logger.log('dispens card...');
     const response = {
       statusCode: 200,
       message: 'web simulation response',
     };
-    callback(response);
     this.dispenser.dispenseCard((event) => {
-      this.logger.log('card taken');
-      callback(event);
+      this.notifyListeners(DispenserPluginWeb.DISPENSE_EVENT, event);
+      this.removeAllListeners();
     });
-    return '';
+    return response;
   }
 
   async recycleCard(): Promise<ResponseStatus> {

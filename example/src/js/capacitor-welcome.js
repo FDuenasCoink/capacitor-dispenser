@@ -1,5 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Dispenser } from '@fduenascoink/capacitor-dispenser';
+import { convertToObject } from 'typescript';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -93,13 +94,13 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#take-photo').addEventListener('click', async function (e) {
-        console.log('dispenseee');
         await Dispenser.init();
-        setTimeout(() => {
-          Dispenser.dispenseCard((event) => {
-            console.log('dispense card', event);
-          });
-        },5_000);
+        console.log('Dispenser init!');
+        const response = await Dispenser.dispenseCard();
+        console.log({ response });
+        Dispenser.addListener('dispense', (event) => {
+          console.log('Event dispense', event);
+        });
       });
     }
   }

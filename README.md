@@ -17,12 +17,12 @@ npx cap sync
 * [`checkDevice()`](#checkdevice)
 * [`testStatus()`](#teststatus)
 * [`init()`](#init)
-* [`dispenseCard(...)`](#dispensecard)
+* [`dispenseCard()`](#dispensecard)
 * [`recycleCard()`](#recyclecard)
 * [`endProcess()`](#endprocess)
 * [`getDispenserFlags()`](#getdispenserflags)
+* [`addListener('dispense', ...)`](#addlistenerdispense)
 * [Interfaces](#interfaces)
-* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
@@ -79,19 +79,15 @@ Setup Azkoyen connection.
 --------------------
 
 
-### dispenseCard(...)
+### dispenseCard()
 
 ```typescript
-dispenseCard(callback: DispenseCallback) => Promise<CallbackID>
+dispenseCard() => Promise<ResponseStatus>
 ```
 
 Funtion to start the process of dispense a card.
 
-| Param          | Type                                                          |
-| -------------- | ------------------------------------------------------------- |
-| **`callback`** | <code><a href="#dispensecallback">DispenseCallback</a></code> |
-
-**Returns:** <code>Promise&lt;string&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#responsestatus">ResponseStatus</a>&gt;</code>
 
 --------------------
 
@@ -135,6 +131,24 @@ Funtion to get all the dispenser flags.
 --------------------
 
 
+### addListener('dispense', ...)
+
+```typescript
+addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+```
+
+Listens for card dispensed.
+
+| Param              | Type                                                                        |
+| ------------------ | --------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'dispense'</code>                                                     |
+| **`listenerFunc`** | <code>(event: <a href="#dispenseevent">DispenseEvent</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -160,13 +174,6 @@ Funtion to get all the dispenser flags.
 | **`date`**          | <code>string</code> |
 
 
-#### DispenseData
-
-| Prop            | Type                 |
-| --------------- | -------------------- |
-| **`completed`** | <code>boolean</code> |
-
-
 #### DispenserFlags
 
 | Prop                   | Type                 | Description                    |
@@ -178,16 +185,18 @@ Funtion to get all the dispenser flags.
 | **`dispenserFull`**    | <code>boolean</code> | El dispensador esta lleno      |
 
 
-### Type Aliases
+#### PluginListenerHandle
+
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
-#### DispenseCallback
+#### DispenseEvent
 
-<code>(data: <a href="#dispensedata">DispenseData</a>, err?: any): void</code>
-
-
-#### CallbackID
-
-<code>string</code>
+| Prop        | Type                                                      |
+| ----------- | --------------------------------------------------------- |
+| **`error`** | <code>{ code: number; message: string; }</code>           |
+| **`data`**  | <code><a href="#responsestatus">ResponseStatus</a></code> |
 
 </docgen-api>
