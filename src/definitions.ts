@@ -94,5 +94,14 @@ export interface DispenserPlugin {
   /**
    * Listens for card dispensed.
    */
-  addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void): Promise<PluginListenerHandle> & PluginListenerHandle;
+  addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void): Promise<PluginListenerHandle> & PluginListenerHandle | string;
+  /**
+   * Removes all listeners
+   */
+  removeAllListeners(): Promise<void>;
+}
+
+export interface DispenserPluginElectron extends DispenserPlugin {
+  removeListener?(listenerId: string): void & Promise<void>;
+  removeAllListeners(type?: string): void & Promise<void>;
 }

@@ -5,7 +5,7 @@ import { defineCustomElement as defineCustomElementItems } from "@ionic/core/com
 import { defineCustomElement as defineCustomElementLabel } from "@ionic/core/components/ion-label";
 import { defineCustomElement as defineCustomElementList } from "@ionic/core/components/ion-list";
 
-import type { DispenserPlugin } from './definitions';
+import type { DispenserPluginElectron } from './definitions';
 
 initialize();
 
@@ -14,7 +14,7 @@ defineCustomElementLabel();
 defineCustomElementItems();
 defineCustomElementList();
 
-const Dispenser = registerPlugin<DispenserPlugin>('Dispenser', {
+const Dispenser = registerPlugin<DispenserPluginElectron>('Dispenser', {
   web: () => import('./web').then(m => new m.DispenserPluginWeb()),
   electron: () => (window as any).CapacitorCustomPlatform.plugins.Dispenser,
 });
