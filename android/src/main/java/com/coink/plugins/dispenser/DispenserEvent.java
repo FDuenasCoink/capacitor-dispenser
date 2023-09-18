@@ -5,6 +5,8 @@ import com.getcapacitor.JSObject;
 import hardware.dispenser.Response_t;
 
 public class DispenserEvent extends JSObject {
+  private String message;
+  private int statusCode;
 
   private DispenserEvent(Response_t response) {
     super();
@@ -15,10 +17,14 @@ public class DispenserEvent extends JSObject {
     error.put("code", code);
     put("error", error);
     put("completed", false);
+    this.message = message;
+    this.statusCode = code;
   }
 
   private DispenserEvent(String message, int statusCode) {
     super();
+    this.message = message;
+    this.statusCode = statusCode;
     put("message", message);
     put("statusCode", statusCode);
     put("completed", true);
@@ -32,5 +38,13 @@ public class DispenserEvent extends JSObject {
 
   public static DispenserEvent error(Response_t response) {
     return new DispenserEvent(response);
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public int getStatusCode() {
+    return statusCode;
   }
 }

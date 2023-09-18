@@ -58,6 +58,7 @@ export class DispenserPluginWeb extends WebPlugin implements DispenserPlugin {
   }
 
   async recycleCard(): Promise<ResponseStatus> {
+    this.removeAllListeners();
     this.logger.log('recycle card');
     this.dispenser.recycleCard();
     return {

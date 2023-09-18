@@ -86,6 +86,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
 
   async recycleCard(): Promise<ResponseStatus> {
     this.unsubscribeFn?.();
+    this.removeAllListeners();
     const response = this.dispenser.recycleCard();
     const status = response.statusCode;
     if (status !== 204 && status !== 515) {
@@ -96,6 +97,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
 
   async endProcess(): Promise<ResponseStatus> {
     this.unsubscribeFn?.();
+    this.removeAllListeners();
     let response = this.dispenser.endProcess();
     let status = response.statusCode;
 

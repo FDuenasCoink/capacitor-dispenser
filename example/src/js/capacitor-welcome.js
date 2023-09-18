@@ -94,7 +94,12 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#take-photo').addEventListener('click', async function (e) {
-        await Dispenser.init();
+        try {
+          await Dispenser.init();
+        } catch (error) {
+          console.log('Error: ', error);
+          console.log('code: ', error.code);
+        }
         console.log('Dispenser init!');
         const response = await Dispenser.dispenseCard();
         console.log({ response });

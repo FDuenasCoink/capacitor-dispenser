@@ -16,3 +16,5 @@
 1463	1608	1694980752720761169	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJNI.java	5d60a0d83a239689
 1608	1914	1694980753024373459	dispenser/CMakeFiles/Dispenser_Wrapper.dir/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJAVA_wrap.cxx.o	c9feb09d234786a0
 1914	1950	1694980753058297472	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/build/intermediates/cxx/Debug/2j572x53/obj/x86/libDispenser_Wrapper.so	7f3f645d624e01a2
+2	332	1695048652588406883	dispenser/CMakeFiles/Dispenser_Wrapper.dir/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/src/main/java/hardware/dispenser/DispenserControlJAVA_wrap.cxx.o	c9feb09d234786a0
+332	375	1695048652629522369	/Users/coink/Desktop/projects/oink-hardware-plugins/capacitor-dispenser/android/build/intermediates/cxx/Debug/2j572x53/obj/x86/libDispenser_Wrapper.so	7f3f645d624e01a2

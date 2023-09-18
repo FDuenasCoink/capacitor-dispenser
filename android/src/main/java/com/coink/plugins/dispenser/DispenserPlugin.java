@@ -1,5 +1,6 @@
 package com.coink.plugins.dispenser;
 
+import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -8,7 +9,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "Dispenser")
 public class DispenserPlugin extends Plugin implements Notifier {
 
-    private static final String ON_DISPENSE_COMPLETED = "dispenseCompleted";
+    private static final String DISPENSE_EVENT = "dispense";
 
     private Dispenser implementation;
     private PluginCall dispenseCall;
@@ -48,12 +49,12 @@ public class DispenserPlugin extends Plugin implements Notifier {
         }
     }
 
-    @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
+    @PluginMethod()
     public void dispenseCard(PluginCall call) {
-        call.setKeepAlive(true);
-        dispenseCall = call;
         try {
             DispenserResponse response = implementation.dispenseCard(this);
+            dispenseCall = call;
+            call.setKeepAlive(true);
             call.resolve(response);
         } catch (DispenserException e) {
             String message = e.getMessage();
@@ -65,6 +66,7 @@ public class DispenserPlugin extends Plugin implements Notifier {
     @PluginMethod()
     public void recycleCard(PluginCall call) {
         if (dispenseCall != null) {
+            removeAllListeners(dispenseCall);
             dispenseCall.release(bridge);
             dispenseCall = null;
         }
@@ -81,6 +83,7 @@ public class DispenserPlugin extends Plugin implements Notifier {
     @PluginMethod()
     public void endProcess(PluginCall call) {
         if (dispenseCall != null) {
+            removeAllListeners(dispenseCall);
             dispenseCall.release(bridge);
             dispenseCall = null;
         }
@@ -108,17 +111,31 @@ public class DispenserPlugin extends Plugin implements Notifier {
 
     @Override
     public void onDispenseCompleted(DispenserEvent event) {
+        JSObject data = new JSObject();
+        data.put("message", event.getMessage());
+        data.put("statusCode", event.getStatusCode());
+        JSObject dataEvent = new JSObject();
+        dataEvent.put("data", dataEvent);
+        notifyListeners(DISPENSE_EVENT, dataEvent);
         if (dispenseCall != null) {
-            dispenseCall.resolve(event);
+            removeAllListeners(dispenseCall);
+            dispenseCall.release(bridge);
+            dispenseCall = null;
         }
     }
 
     @Override
     public void onDispenseError(DispenserException error) {
+        JSObject errorData = new JSObject();
+        errorData.put("code", error.getCode());
+        errorData.put("message", error.getMessage());
+        JSObject dataEvent = new JSObject();
+        dataEvent.put("error", errorData);
+        notifyListeners(DISPENSE_EVENT, dataEvent);
         if (dispenseCall != null) {
-            String message = error.getMessage();
-            String code = error.getCode();
-            dispenseCall.reject(message, code);
+            removeAllListeners(dispenseCall);
+            dispenseCall.release(bridge);
+            dispenseCall = null;
         }
     }
 
