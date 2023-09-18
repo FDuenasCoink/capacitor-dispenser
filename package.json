@@ -1,6 +1,6 @@
 {
   "name": "@fduenascoink/capacitor-dispenser",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "description": "Plugin to control the card dispenser from capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

@@ -1,6 +1,8 @@
 import type { IDispenser, UnsubscribeFunc } from '@fduenascoink/oink-addons';
 import { Dispenser as DispenserAddon } from '@fduenascoink/oink-addons';
+import { app } from 'electron';
 import { EventEmitter } from 'events';
+import { join } from 'path';
 
 import type { DeviceStatus, DispenserFlags, DispenserPlugin, ResponseStatus } from '../../src/definitions';
 
@@ -14,13 +16,14 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
   constructor() {
     super();
     const config = getCapacitorElectronConfig('Dispenser');
+    const logsPath = app.getPath('documents');
     this.dispenser = new DispenserAddon({
       maxInitAttempts: config.maxInitAttempts ?? 4,
       longTime: config.longTime ?? 3,
       shortTime: config.shortTime ?? 0,
       maximumPorts: config.maximumPorts ?? 10,
       logLevel: config.logLevel ?? 1,
-      logPath: 'logs/dispenser.log',
+      logPath: join(logsPath, 'oink-logs', 'dispenser.log'),
     });
   }
 
