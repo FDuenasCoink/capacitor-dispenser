@@ -53,7 +53,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
   }
 
   async dispenseCard(): Promise<ResponseStatus> {
-    this.unsubscribeFn?.();
+    await this.unsubscribe();
     let response = this.dispenser.dispenseCard();
     let status = response.statusCode;
     
@@ -69,7 +69,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
       throw new PluginError(response.message, response.statusCode);
     }
 
-    this.unsubscribeFn = this.dispenser.onDispense((dispenseEvent) => {
+    this.unsubscribeFn = this.dispenser.onDispense(async (dispenseEvent) => {
       const status = dispenseEvent.statusCode;
       if (status === 301) return;
       const succesCodes = [201, 202, 506];
@@ -81,14 +81,14 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
         this.emit(Dispenser.DISPENSE_EVENT, { error });
       }
       this.removeAllListeners(Dispenser.DISPENSE_EVENT);
-      this.unsubscribeFn?.();
+      await this.unsubscribe();
     });
 
     return response;
   }
 
   async recycleCard(): Promise<ResponseStatus> {
-    this.unsubscribeFn?.();
+    await this.unsubscribe();
     this.removeAllListeners();
     const response = this.dispenser.recycleCard();
     const status = response.statusCode;
@@ -99,7 +99,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
   }
 
   async endProcess(): Promise<ResponseStatus> {
-    this.unsubscribeFn?.();
+    await this.unsubscribe();
     this.removeAllListeners();
     let response = this.dispenser.endProcess();
     let status = response.statusCode;
@@ -149,6 +149,16 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
   // @ts-ignore
   removeListener(event: string | symbol, listener: (...args: any[]) => void): any {
     return super.removeListener(event, listener);
+  }
+
+  private sleep() {
+    return new Promise(resolve => setTimeout(resolve, 800));
+  }
+
+  private async unsubscribe() {
+    if (!this.unsubscribeFn) return;
+    this.unsubscribeFn?.();
+    await this.sleep();
   }
 
 }
