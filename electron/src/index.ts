@@ -159,6 +159,7 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
     if (!this.unsubscribeFn) return;
     this.unsubscribeFn?.();
     await this.sleep();
+    this.unsubscribeFn = undefined;
   }
 
 }
