@@ -1,5 +1,5 @@
-import type { IDispenser, UnsubscribeFunc } from '@fduenascoink/oink-addons';
-import { Dispenser as DispenserAddon } from '@fduenascoink/oink-addons';
+import type { IDispenser, UnsubscribeFunc } from '@fduenascoink/dispenser-addon';
+import { Dispenser as DispenserAddon } from '@fduenascoink/dispenser-addon';
 import { app } from 'electron';
 import { EventEmitter } from 'events';
 import { join } from 'path';

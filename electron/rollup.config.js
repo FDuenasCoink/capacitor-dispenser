@@ -14,7 +14,7 @@ export default {
   ],
   external: [
     '@capacitor/core',
-    '@fduenascoink/oink-addons',
+    '@fduenascoink/dispenser-addon',
     'electron',
     'path',
     'fs',
