@@ -152,14 +152,14 @@ export class Dispenser extends EventEmitter implements DispenserPlugin {
   }
 
   private sleep() {
-    return new Promise(resolve => setTimeout(resolve, 800));
+    return new Promise(resolve => setTimeout(resolve, 500));
   }
 
   private async unsubscribe() {
     if (!this.unsubscribeFn) return;
     this.unsubscribeFn?.();
-    await this.sleep();
     this.unsubscribeFn = undefined;
+    await this.sleep();
   }
 
 }
