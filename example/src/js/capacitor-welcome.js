@@ -2,7 +2,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { Dispenser } from '@fduenascoink/capacitor-dispenser';
 import { convertToObject } from 'typescript';
 
-const response = await Dispenser.init();
+Dispenser.init();
 
 window.customElements.define(
   'capacitor-welcome',

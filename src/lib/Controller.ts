@@ -75,36 +75,56 @@ export class Controller {
   }
 
   private generateOptions() {
-    const div = document.createElement('ion-list');
-    div.id = this.OPTION_CONTAINER_ID;
-    div.style.width = '250px';
-    this.CONTENT_WIDTH = div.style.width;
+    const ul = document.createElement('ul');
+    ul.id = this.OPTION_CONTAINER_ID;
+    ul.style.width = '250px';
+    ul.style.padding = '0px';
+    ul.style.margin = '0px';
+    this.CONTENT_WIDTH = ul.style.width;
     Object.entries(this.options).forEach(([key, value]) => {
       const option = this.generateOption(key, value);
-      div.appendChild(option);
+      ul.appendChild(option);
     })
-    return div;
+    return ul;
   }
 
   private generateOption(labelText: string, value: boolean) {
-    const container = document.createElement('ion-item');
+    const container = document.createElement('li');
+    container.style.listStyle = 'none';
 
-    const label = document.createElement('ion-label');
-    label.innerText = labelText;
+    const label = document.createElement('label');
+    label.style.padding = '16px';
+    label.style.display = 'flex';
+    label.style.justifyContent = 'space-between';
+    label.style.borderBottom = '1px solid #eee';
+    label.style.animation = '.2s';
+    label.style.cursor = 'pointer';
+    label.onmouseenter = () => {
+      label.style.background = '#eee';
+    }
+    label.onmouseleave = () => {
+      label.style.background = '#FFF';
+    }
 
-    const check = document.createElement('ion-checkbox');
+    const text = document.createElement('span');
+    text.style.fontFamily = 'Arial, Helvetica, sans-serif';
+    text.style.fontSize = '16px';
+    text.innerText = labelText;
+
+    const check = document.createElement('input');
+    check.type = 'checkbox'
     check.checked = value;
-    check.innerText = labelText;
-    check.addEventListener('ionChange', (event) => {
-      const checked = (event as CustomEvent).detail.checked;
+    check.addEventListener('change', (event) => {
+      const target = event.target as HTMLInputElement;
+      const checked = target.checked;
       this.options = {
         ...this.options,
         [labelText]: checked,
       }
     });
-
+    label.appendChild(text);
+    label.appendChild(check);
     container.appendChild(label);
-    container.appendChild(check);
     return container;
   }
 }
