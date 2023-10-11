@@ -31,12 +31,23 @@ export class Card {
     card.style.height = `${this.CARD_HEIGHT}px`;
     card.style.transition = '.3s all ease-in-out';
 
+    card.onmousedown = () => {
+      card.onmousemove = this.handleMoveDesktop.bind(this);
+    }
+    card.onmouseup = () => {
+      card.onmousemove = null;
+      this.handleTouchEnd();
+    }
+
     card.ontouchmove = this.handleMove.bind(this);
     card.ontouchend = this.handleTouchEnd.bind(this);
 
     const img = document.createElement('img');
     img.src = visaImage;
+    img.style.userSelect = 'none';
     img.style.height = '100%';
+    img.style.cursor = 'pointer';
+    img.setAttribute("draggable", 'false');
 
     card.appendChild(img);
     document.body.appendChild(card);
@@ -60,6 +71,15 @@ export class Card {
       this.initYpos = touch.pageY;
     }
     const pos = touch.pageY;
+    const deltaY = pos - this.initYpos;
+    this.moveCard(deltaY);
+  }
+
+  private handleMoveDesktop = (event: MouseEvent) => {
+    if (!this.initYpos) {
+      this.initYpos = event.pageY;
+    }
+    const pos = event.pageY;
     const deltaY = pos - this.initYpos;
     this.moveCard(deltaY);
   }

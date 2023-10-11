@@ -22,6 +22,7 @@ npx cap sync
 * [`endProcess()`](#endprocess)
 * [`getDispenserFlags()`](#getdispenserflags)
 * [`addListener('dispense', ...)`](#addlistenerdispense)
+* [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -134,7 +135,7 @@ Funtion to get all the dispenser flags.
 ### addListener('dispense', ...)
 
 ```typescript
-addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'dispense', listenerFunc: (event: DispenseEvent) => void) => (Promise<PluginListenerHandle> & PluginListenerHandle) | string
 ```
 
 Listens for card dispensed.
@@ -144,7 +145,18 @@ Listens for card dispensed.
 | **`eventName`**    | <code>'dispense'</code>                                                     |
 | **`listenerFunc`** | <code>(event: <a href="#dispenseevent">DispenseEvent</a>) =&gt; void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>string | (Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a>)</code>
+
+--------------------
+
+
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => Promise<void>
+```
+
+Removes all listeners
 
 --------------------
 

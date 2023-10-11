@@ -1,6 +1,6 @@
 {
   "name": "@fduenascoink/capacitor-dispenser",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "Plugin to control the card dispenser from capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -46,8 +46,7 @@
     "build-electron": "tsc --project electron/tsconfig.json && rollup -c electron/rollup.config.js && rimraf ./electron/build"
   },
   "dependencies": {
-    "@fduenascoink/dispenser-addon": "1.4.0",
-    "@ionic/core": "^7.4.0"
+    "@fduenascoink/dispenser-addon": "1.4.0"
   },
   "devDependencies": {
     "@capacitor-community/electron": "^4.1.2",
@@ -71,7 +70,8 @@
     "typescript": "~4.1.5"
   },
   "peerDependencies": {
-    "@capacitor/core": "^5.0.0"
+    "@capacitor/core": "^5.0.0",
+    "@ionic/core": "*"
   },
   "publishConfig": {
     "@fduenascoink:registry": "https://npm.pkg.github.com"
