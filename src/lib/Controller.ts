@@ -51,6 +51,7 @@ export class Controller {
     div.style.display = 'flex';
     div.style.transition = '.2s all ease-in-out';
     div.style.overflow = 'hidden';
+    div.style.background = '#FFF';
     return div;
   }
 
@@ -109,6 +110,7 @@ export class Controller {
     const text = document.createElement('span');
     text.style.fontFamily = 'Arial, Helvetica, sans-serif';
     text.style.fontSize = '16px';
+    text.style.color = '#000';
     text.innerText = labelText;
 
     const check = document.createElement('input');
